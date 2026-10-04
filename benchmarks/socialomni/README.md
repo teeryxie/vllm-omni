@@ -222,8 +222,11 @@ uv run --no-sync python -m pytest -sv \
 
 Set `VLLM_SOCIALOMNI_MODEL` to use a local checkpoint. The test checks parsed
 answers, response generation, and the incomplete-quality result without
-external judges. It is included in the existing nightly accuracy test command
-and runs without a dataset-path override. It does not run the full dataset
+external judges. It runs in a separate two-GPU nightly job without a
+dataset-path override. On pull requests, source filtering selects this job
+for changes to the SocialOmni implementation, its model test, or the shared
+Qwen3-Omni serving dependencies. SocialOmni-only changes do not select the
+Daily-Omni or Seed-TTS accuracy job. The test does not run the full dataset
 or contact external judge services.
 
 Reference: [SocialOmni paper](https://arxiv.org/abs/2603.16859).
